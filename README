@@ -1,0 +1,127 @@
+/*
+
+*********ESNIFER********
+   EJECUTAR BAJO ROOT
+*******************************************
+-------------------------------------
+   snifo-paquetes.c
+------------------------------------
+Compilación bajo consola Linux:
+-----------------------------------
+$ gcc esnifo-paquetes.c -lpcap -o esnifo-paquetes
+----------------------------------------
+Para el funcionamiento de este programa, deberán estar
+instaladas las librerías pcap.
+Forma de instalarlas bajo Linux:
+sudo apt-get update
+sudo apt-get install libpcap-dev
+
+Para saber las tarjetas presentes en el ordenador
+bajo linux se puede utilizar el comando ifconfig.
+Debe estar instalado el paquete net-tools.
+Puede instalarse en Linux Ubuntu con este comando:
+sudo apt install net-tools.
+El programa al inicio hace una llamada a dicho
+comando, indicando las caracteristicas, y parámetros
+de red.
+Se puede snifar y probar con cualquier tarjeta, 
+incluida la ethernet, LOOPBACK. wifi...
+El programa obtiene una tarjeta de red por defecto.
+El comado habitual seŕia.
+sudo ./snifo-paquetes [-tu tarjeta de red, IP OBJETIVO, página web, etc-]
+Ejeemplos:
+$ sudo ./esnifo-paquetes [Sin atributos]
+$ sudo ./esnifo-paquetes enxd03745c56b84
+$ sudo ./esnifo-paquetes 192.168.0.0
+$ sudo ./esnifo-paquetes www.paginacualquiera.com
+En caso de esnifar una página web, para que el esnifer
+sea efectivo se deberá acceder a dicha página, 
+con el programa activado, pidiendo el
+endenamiento de algún enlace, con el fin de 
+que haya tráfico de red más intenso.
+
+************************************************
+El programa fue realizado en plataforma
+LINUX Ubuntu 20.04.4 LTS.
+Bajo el standard ANSI C.-C-11
++++++++++++++++++++++++++++++++++++++++++
+
+Dependiendo de la platafaorma pueden
+existir algunos errores de compilación tipo warning,
+que no son importantes.
+---------------------------------------------------
+****************************************************
+EJEMPLO DE ESNIFADO - (El dispositivo de red loopback).
+$ sudo ./esnifo-paquetes lo 
+---------------------------------
+Si se quieren guardar los esnifados en un fichero de 
+texto, se puede utilizar este comando.
+$ sudo ./esnifo-paquetes   > mifichero.txt
+Se deberá crear el fichero vacio mifichero.txt.
+El programa esnifa por defecto 80 paquetes,
+esa cantidad se puede modificar según preferencias,
+y recompilar el programa.
+Para salir de consola con Control C.
+
+++++++++++++++++++++++++++++++++++++++++++++++
+SALIDA EJEMPLO POR CONSOLA LINUX
+-----------------------------------------
+Tarjeta de red wifi: wlp1s0
+Dirección IP: 192.168.0.0
+Mascara de Red: 255.255.255.0
+***********************************************
+*****ESPERA,ESTOY ESNIFANDO  PAQUETES
+****************************************************
+****************************************************************
+****ESNIFAMOS DE LA TARJETA: wlp1s0 -> EL PAQUETE N°:0 DE: 78 BYTES******
+****************************************************************
+45 00 00 4e 51 49 40 00 32 06 39 32 8c 52 71 19 | E..NQI@.2.92.Rq.
+c0 a8 00 1b 01 bb bd 78 92 1a 73 e1 4f c5 1d 01 | .......x..s.O...
+80 18 00 46 40 68 00 00 01 01 08 0a 7f 91 4d 56 | ...F@h........MV
+cb a9 16 b6 17 03 03 00 15 c1 51 f9 e2 7d ba 7a | ..........Q..}.z
+7b b7 85 cf 31 d7 5d 1f 6f cc b0 1c c7 63       | {...1.].o....c
+****************************************************************
+****ESNIFAMOS DE LA TARJETA: wlp1s0 -> EL PAQUETE N°:1 DE: 52 BYTES******
+****************************************************************
+45 00 00 34 51 4a 40 00 32 06 39 4b 8c 52 71 19 | E..4QJ@.2.9K.Rq.
+c0 a8 00 1b 01 bb bd 78 92 1a 73 fb 4f c5 1d 1f | .......x..s.O...
+80 10 00 46 ec 07 00 00 01 01 08 0a 7f 91 4d c0 | ...F..........M.
+cb aa 01 16                                     | ....
+-----------------------------------------------------------
+**********************************************************************
+*Esnifer Tarjeta-red: enxd03745c56b84 -> Paquete N°:77 de: 339 Bytes*
+**********************************************************************
+45 00 01 53 22 FC 40 00  3A 06 A5 0D 17 3A 9F 9E   |  E..S".@.:....:.. 
+C0 A8 00 1B 01 BB D0 B8  A2 62 1F D6 E3 BB 31 41   |  .........b....1A 
+80 18 01 F9 E0 41 00 00  01 01 08 0A 2D AD 14 68   |  .....A......-..h 
+6D DC C8 8A 17 03 03 01  1A E7 65 88 00 40 73 DD   |  m.........e..@s. 
+E2 69 B7 58 33 41 05 F3  ED 31 C5 E3 81 A5 02 25   |  .i.X3A...1.....% 
+2B B1 66 DD EF 1A 05 7C  A3 A1 34 08 E5 60 51 66   |  +.f....|..4..`Qf 
+68 4D 18 B5 49 A4 F9 5C  AA 9C 0D 3F 15 97 F6 35   |  hM..I..\...?...5 
+D6 2C 5F 1D 46 09 A8 BB  FF 24 95 11 2D E0 99 42   |  .,_.F....$..-..B 
+7A AF B5 9A 7F 1A CA C0  9C D6 BC 53 C9 4F E9 E0   |  z..........S.O.. 
+0B EA D2 F4 00 9D 3B EA  95 53 E1 AF 7B E5 E0 CA   |  ......;..S..{... 
+D9 32 DE 7E C4 96 77 03  B3 C4 3B 80 EF 1F 46 B5   |  .2.~..w...;...F. 
+EB EE 77 80 2A A7 F2 5C  23 BC 04 DF A5 AA D6 66   |  ..w.*..\#......f 
+3B C3 9E A2 56 66 D9 EE  BB F7 16 05 DE 8C 0E 01   |  ;...Vf.......... 
+E5 FA C9 62 2E F8 4D DA  39 B7 CC FF 8E 77 20 7E   |  ...b..M.9....w ~ 
+33 48 AA 73 23 4D AC 52  42 F6 D4 09 D2 E6 21 E5   |  3H.s#M.RB.....!. 
+F1 A4 8A 6F A4 00 25 8A  F4 8A 74 EE 13 6C 0E E0   |  ...o..%...t..l.. 
+DA CC 56 5D 1C 7E B9 00  96 BB 4E AB DC 11 5C 61   |  ..V].~....N...\a 
+30 1C 79 62 61 90 63 63  FF C3 76 7B 98 BF C9 C1   |  0.yba.cc..v{.... 
+D2 51 7B FF 49 DE 24 D3  21 61 F2 DE 0F F7 28 E3   |  .Q{.I.$.!a....(. 
+B1 19 FD 69 58 C6 1F 5C  B2 32 DD 69 54 C9 86 2F   |  ...iX..\.2.iT../ 
+53 5B 35 68 53 D0 07 A2  AE 97 59 95 C8 E7 5C 8E   |  S[5hS.....Y...\. 
+26 CE 1C  
+-----------------------------------------------------------------
+****************************************************************
+Hilario Iglesias Martínez.
+-----------------------------------------------------
+
+
+
+
+
+
+
+
