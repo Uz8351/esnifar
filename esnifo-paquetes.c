@@ -55,12 +55,18 @@ char comando[60];
     cadena de errores */
     struct in_addr address; /* Estructura usada por cada ip y subnet */
 
-    /* Buscamos la tarjeta de red */
+    /* Este tramo de código está anulado por
+    conflictos con la función pcap_lookupdev(error_buffer),
+    ya que da error tipo warning: ‘pcap_lookupdev’
+    de compilación. Se sugieren ideas.
+    **************************************
     tarjeta_red = pcap_lookupdev(error_buffer);
     if (tarjeta_red == NULL) {
         printf("%s\n", error_buffer);
         return 1;
     }
+    ****************************************
+    */
  printf(CYAN"***********CARACTERISTICAS DE LA RED**********\n" );
  sprintf (comando, "ifconfig");
  salida = system (comando);
@@ -97,10 +103,10 @@ char comando[60];
     printf("Tarjeta de red: %s\n", tarjeta_red);
     {
 
-    printf("**************************************************\n");
+    printf("**********************************************************************\n");
     printf(ROJO"----------------------------------------------.\n**");
-    printf("****¡EN 8 SG. SE VA A INICIAR EL ESNIFADO DE RED!.****\n");
-    printf("**************************************************\n");
+    printf("****¡EN 8 SG. SE VA A INICIAR EL ESNIFADO. MIRA TU CONFIG DE RED!.****\n");
+    printf("**********************************************************************\n");
     printf(VERDE" " );
     sleep(8); //Pausa de 10 segundos
 /*
@@ -158,8 +164,6 @@ for (i = 0; i < recv_length; ++i) {
             printf("\n" );
 }
 }
-//printf(CYAN"***********CARACTERISTICAS DE LA RED**********\n" );
-//sprintf (comando, "ifconfig");
-//salida = system (comando);
+
 }
 
